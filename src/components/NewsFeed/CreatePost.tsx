@@ -45,14 +45,14 @@ const CreatePost = () => {
         />
         <input
           type="text"
-          className="w-full p-2 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 rounded-lg bg-gray-100  focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="What's on your mind?"
           onClick={openModal} // Open modal on click
         />
       </div>
 
       {/* Post Categories */}
-      <div className="flex mt-4 justify-between">
+      <div className="flex flex-wrap mt-4 gap-lg-0 gap-5 md:justify-between">
         <button className="flex items-center hover:text-blue-500 transition-colors">
           <FaThumbsUp className="mr-2 text-xl text-blue-500" /> Most Upvoted
         </button>
@@ -106,7 +106,7 @@ const CreatePost = () => {
 
           {/* Modal Buttons */}
           <div className="flex justify-end mt-4">
-            <button onClick={closeModal} className="mr-2 py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400 transition-colors">
+            <button onClick={closeModal} className="mr-2 py-2 px-4 text-black bg-gray-200 rounded-lg hover:bg-gray-400 transition-colors">
               Cancel
             </button>
             <button className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">

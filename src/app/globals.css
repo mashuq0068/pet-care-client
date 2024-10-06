@@ -27,7 +27,7 @@
     background-color: #e5e7eb;
     color: black;
   }
-  [data-toolpad-color-scheme="dark"] > .container {
+  [data-toolpad-color-scheme="dark"]  .container {
     background-color: #121212 !important;
     color: white !important;
   }
@@ -63,7 +63,7 @@
   }
   [data-toolpad-color-scheme="dark"] 
   .modal-content {
-   color: black;
+   background-color: black;
   }
   .ql-editor {
     border: none !important;
