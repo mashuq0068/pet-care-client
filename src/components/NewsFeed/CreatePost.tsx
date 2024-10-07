@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent } from "react";
 import Image from "next/image";
-import { FaCommentDots, FaLightbulb, FaBookOpen, FaThumbsUp, FaUpload } from "react-icons/fa";
+import { FaCommentDots, FaLightbulb, FaBookOpen, FaThumbsUp, FaUpload, FaSearch } from "react-icons/fa";
 import Modal from "react-modal";
 import dynamic from "next/dynamic";
 
@@ -14,6 +14,10 @@ const CreatePost = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editorContent, setEditorContent] = useState<string>(""); // For storing editor content
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search input
+
+  // Filter posts based on search term
+
 
   // Handle image upload
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -33,6 +37,7 @@ const CreatePost = () => {
   };
 
   return (
+    <>
     <div className="rounded-lg container shadow p-4 mb-4 mt-8">
       {/* Post Creation Input */}
       <div className="flex items-center mb-2">
@@ -45,7 +50,7 @@ const CreatePost = () => {
         />
         <input
           type="text"
-          className="w-full p-2 rounded-lg bg-gray-100  focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 rounded-lg bg-gray-100 theme-bg  focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="What's on your mind?"
           onClick={openModal} // Open modal on click
         />
@@ -116,6 +121,17 @@ const CreatePost = () => {
         </div>
       </Modal>
     </div>
+    <div className="container w-full rounded-lg p-0 my-4 relative">
+      <FaSearch className="absolute top-[35%] left-4 text-gray-400" />
+      <input
+        type="text"
+        placeholder="Search posts..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 shadow"
+      />
+    </div>
+    </>
   );
 };
 
