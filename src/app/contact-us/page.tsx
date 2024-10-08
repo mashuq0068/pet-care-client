@@ -18,17 +18,17 @@ const ContactUsPage = () => {
             <form>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 theme-text mb-1">Your Name</label>
-                <input type="text" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your name" />
+                <input type="text" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Enter your name" />
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 theme-text mb-1">Your Email</label>
-                <input type="email" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your email" />
+                <input type="email" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Enter your email" />
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 theme-text mb-1">Your Message</label>
-                <textarea rows={4} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Write your message here"></textarea>
+                <textarea rows={4} className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Write your message here"></textarea>
               </div>
-              <button type="submit" className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Send Message</button>
+              <button type="submit" className="w-full py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500">Send Message</button>
             </form>
           </div>
 
@@ -48,10 +48,10 @@ const ContactUsPage = () => {
             <div className="bg-white theme-bg theme bg rounded-lg shadow-md p-8 text-center md:text-left">
               <h3 className="text-xl font-semibold text-gray-700 theme-text mb-4">Follow Us</h3>
               <div className="flex space-x-4 justify-center md:justify-start">
-                <a href="#" className="text-blue-600 hover:text-blue-800"><FaFacebookF /></a>
-                <a href="#" className="text-blue-400 hover:text-blue-600"><FaTwitter /></a>
+                <a href="#" className="text-purple-600 hover:text-purple-800"><FaFacebookF /></a>
+                <a href="#" className="text-purple-400 hover:text-purple-600"><FaTwitter /></a>
                 <a href="#" className="text-pink-500 hover:text-pink-700"><FaInstagram /></a>
-                <a href="#" className="text-blue-700 hover:text-blue-900"><FaLinkedinIn /></a>
+                <a href="#" className="text-purple-700 hover:text-purple-900"><FaLinkedinIn /></a>
               </div>
             </div>
 

@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import Image from "next/image";
 import moment from "moment"; // Import Moment.js for time formatting
 
-interface Comment {
+export interface Comment {
   id: number;
   author: string;
   text: string;
@@ -57,7 +57,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
       overlayClassName="modal-overlay"
       ariaHideApp={false}
     >
-      <div className="md:p-6 rounded-lg  md:max-w-lg mx-auto">
+      <div className=" rounded-lg  md:max-w-lg mx-auto">
       <div className="flex items-center mb-4">
           <input
             type="text"
@@ -68,13 +68,13 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
           />
           <button
             onClick={handleAddComment}
-            className="bg-blue-500 text-white theme-text p-3 border rounded-r-lg hover:bg-blue-600 transition-all"
+            className="bg-purple-500 text-white theme-text p-3 border rounded-r-lg hover:bg-purple-600 transition-all"
           >
            Comment
           </button>
         </div>
         <h2 className="text-2xl font-bold mb-6 ">Comments</h2>
-        <div className="mb-6 max-h-60 overflow-y-auto pr-4">
+        <div className="mb-6 max-h-60 overflow-y-auto ">
           {comments.length > 0 ? (
             comments.map((comment) => (
               <div key={comment.id} className="flex items-center mb-5">

@@ -50,7 +50,7 @@ const CreatePost = () => {
         />
         <input
           type="text"
-          className="w-full p-2 rounded-lg bg-gray-100 theme-bg  focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 rounded-lg bg-gray-100 theme-bg  focus:outline-none focus:ring-2 focus:ring-purple-500"
           placeholder="What's on your mind?"
           onClick={openModal} // Open modal on click
         />
@@ -58,8 +58,8 @@ const CreatePost = () => {
 
       {/* Post Categories */}
       <div className="flex flex-wrap mt-4 gap-lg-0 gap-5 md:justify-between">
-        <button className="flex items-center hover:text-blue-500 transition-colors">
-          <FaThumbsUp className="mr-2 text-xl text-blue-500" /> Most Upvoted
+        <button className="flex items-center hover:text-purple-500 transition-colors">
+          <FaThumbsUp className="mr-2 text-xl text-purple-500" /> Most Upvoted
         </button>
         <button className="flex items-center hover:text-green-500 transition-colors">
           <FaCommentDots className="mr-2 text-green-500 text-xl" /> Most Commented
@@ -93,7 +93,7 @@ const CreatePost = () => {
 
           {/* Image Upload */}
           <div className="mt-4 flex items-center space-x-4">
-            <label className="cursor-pointer flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors">
+            <label className="cursor-pointer flex items-center bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition-colors">
               <FaUpload className="mr-2" /> Upload Image
               <input type="file" onChange={handleImageUpload} className="hidden" />
             </label>
@@ -114,7 +114,7 @@ const CreatePost = () => {
             <button onClick={closeModal} className="mr-2 py-2 px-4 text-black bg-gray-200 rounded-lg hover:bg-gray-400 transition-colors">
               Cancel
             </button>
-            <button className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+            <button className="py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
               Post
             </button>
           </div>
@@ -128,7 +128,7 @@ const CreatePost = () => {
         placeholder="Search posts..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 shadow"
+        className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
       />
     </div>
     </>
