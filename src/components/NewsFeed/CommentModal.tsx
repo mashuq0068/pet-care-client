@@ -53,7 +53,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="modal-content"
+     className="bg-white theme-bg rounded-lg p-8 w-full shadow-xl max-w-md mx-auto"
       overlayClassName="modal-overlay"
       ariaHideApp={false}
     >
@@ -73,7 +73,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
            Comment
           </button>
         </div>
-        <h2 className="text-2xl font-bold mb-6 ">Comments</h2>
+        <h2 className="text-2xl font-bold mb-4 ">Comments</h2>
         <div className="mb-6 max-h-60 overflow-y-auto ">
           {comments.length > 0 ? (
             comments.map((comment) => (
@@ -86,7 +86,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
                   height={40}
                   className="rounded-full w-10 h-10 mr-3 object-cover"
                 />
-                <div className="flex-1 bg-gray-100 theme-bg theme-text p-4 rounded-lg shadow-sm">
+                <div className="flex-1 bg-purple-100 theme-bg theme-text p-4 rounded-lg shadow-sm">
                   <div className="flex justify-between items-center mb-2">
                     <p className="font-semibold theme-text text-gray-800">{comment.author}</p>
                     {/* Relative Time using Moment.js */}

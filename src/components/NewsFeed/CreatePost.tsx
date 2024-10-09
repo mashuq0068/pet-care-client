@@ -76,7 +76,7 @@ const CreatePost = () => {
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
-        className="modal-content rounded-lg shadow-lg p-4"
+       className="bg-white theme-bg rounded-lg p-2 w-full shadow-xl max-w-lg mx-auto"
         overlayClassName="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         contentLabel="Create Post Modal"
       >
