@@ -1,14 +1,54 @@
+"use client";
+
 import Image from "next/image";
-import { FaUserAlt, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaUserAlt, FaEnvelope, FaLock, FaImage } from "react-icons/fa";
+import { useState } from "react";
+import { useSignUpMutation } from "@/redux/features/auth/auth.api";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
+
+
 
 const RegistrationPage = () => {
+  const router = useRouter()
+  const [imageUrl, setImageUrl] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [signUp] = useSignUpMutation();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+
+    // Handle form submission logic, e.g., sending data to an API
+    const userData = {
+      name: fullName,
+      email: email,
+      password: password,
+      image: imageUrl,
+    };
+
+    try {
+      await signUp(userData).unwrap();
+      toast.success("You successfully created your account");
+       router.push('/login')
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      setImageUrl("");
+    } catch (err) {
+      console.error("Signup failed:", err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="  rounded-lg flex w-full max-w-4xl">
+      <div className="rounded-lg flex w-full max-w-4xl">
         {/* Left Side Image */}
         <div className="hidden md:flex md:w-1/2 relative">
           <Image
-            src="https://i.ibb.co.com/Jt13zKY/mobile-login-concept-illustration-114360-83-removebg-preview.png" 
+            src="/images/reg.png"
             alt="Registration Image"
             layout="fill"
             objectFit="cover"
@@ -25,51 +65,62 @@ const RegistrationPage = () => {
             Fill in the details below to sign up for your account
           </p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Full Name */}
             <div className="relative">
-              <FaUserAlt className="absolute top-3 left-3 text-gray-400" />
+              <FaUserAlt className="absolute top-[30%] left-3 text-gray-400" />
               <input
                 type="text"
-                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
                 placeholder="Full Name"
+                required
               />
             </div>
 
             {/* Email Address */}
             <div className="relative">
-              <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
+              <FaEnvelope className="absolute top-[30%] left-3 text-gray-400" />
               <input
                 type="email"
-                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
                 placeholder="Email Address"
+                required
               />
             </div>
 
             {/* Password */}
             <div className="relative">
-              <FaLock className="absolute top-3 left-3 text-gray-400" />
+              <FaLock className="absolute top-[30%] left-3 text-gray-400" />
               <input
                 type="password"
-                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
                 placeholder="Password"
+                required
               />
             </div>
 
-            {/* Confirm Password */}
+            {/* Image URL */}
             <div className="relative">
-              <FaLock className="absolute top-3 left-3 text-gray-400" />
+              <FaImage className="absolute top-[30%] left-3 text-gray-400" />
               <input
-                type="password"
-                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                placeholder="Confirm Password"
+                type="url"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+                placeholder="Image URL (optional)"
               />
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="w-full py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
             >
               Sign Up
             </button>
@@ -78,7 +129,7 @@ const RegistrationPage = () => {
           <div className="text-center text-gray-500">
             <p>
               Already have an account?{" "}
-              <a href="/login" className="text-blue-600 hover:underline">
+              <a href="/login" className="text-purple-600 hover:underline">
                 Log in
               </a>
             </p>

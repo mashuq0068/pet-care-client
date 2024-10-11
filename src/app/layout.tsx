@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import {Roboto_Slab}  from "next/font/google"
-import MainLayout from "@/components/layout/MainLayout";
 import ReduxProvider from "@/redux/ReduxProvider";
+import  { Toaster } from 'react-hot-toast'
 
 export const roboto_slab = Roboto_Slab({
   subsets: ['latin'],
@@ -23,9 +23,8 @@ export default function RootLayout({
     <html lang="en" className={roboto_slab.className}>
      <ReduxProvider>
      <body>
-        <MainLayout>
+      <Toaster position="top-center"/>
         {children}
-        </MainLayout>
       </body>
      </ReduxProvider>
     </html>

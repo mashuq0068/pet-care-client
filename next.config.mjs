@@ -18,6 +18,10 @@ const nextConfig = {
           protocol: 'https',
           hostname: 'i.postimg.cc',
         },
+        {
+          protocol: 'https',
+          hostname: 'pet-care-server-pi.vercel.app',
+        },
       ],
     },
   };
