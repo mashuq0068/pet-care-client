@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import {Roboto_Slab}  from "next/font/google"
 import MainLayout from "@/components/layout/MainLayout";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 export const roboto_slab = Roboto_Slab({
   subsets: ['latin'],
@@ -20,12 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={roboto_slab.className}>
-      <body>
+     <ReduxProvider>
+     <body>
         <MainLayout>
         {children}
         </MainLayout>
-        {/* {children} */}
       </body>
+     </ReduxProvider>
     </html>
   );
 }
