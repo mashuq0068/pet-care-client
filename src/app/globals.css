@@ -5,7 +5,7 @@
 /* dashboard layout  */
 .css-162wlvu-MuiPaper-root-MuiAppBar-root {
   border-bottom-width: 0px !important;
-  background-color: #f3e8ff;
+  background-color: #f3e8ff !important;
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04))
     drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
 
@@ -14,13 +14,13 @@
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 [data-toolpad-color-scheme="dark"] .css-162wlvu-MuiPaper-root-MuiAppBar-root {
-  background-color: #121212;
+  background-color: #121212 !important;
 }
 
 .css-1m3g8jr-MuiPaper-root-MuiDrawer-paper {
   border-width: 0px !important;
-  background-color: #f3e8ff ;
-  z-index: 500;
+  background-color: #f3e8ff !important;
+  z-index: 500 !important;
  
 
   /* filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
@@ -28,7 +28,7 @@
 }
 [data-toolpad-color-scheme="dark"] .css-1m3g8jr-MuiPaper-root-MuiDrawer-paper {
   border-width: 0px !important;
-  background-color: #121212;
+  background-color: #121212 !important;
   /* filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
 }
@@ -38,14 +38,14 @@
   color: white !important;
 }
 [data-toolpad-color-scheme="dark"] .MuiListSubheader-root {
-  background-color: #121212;
+  background-color: #121212 !important;
 }
 .MuiTypography-h {
   content: "Catpad" !important;
 }
 [data-toolpad-color-scheme="dark"] {
-  background-color: #121212;
-  color: white;
+  background-color: #121212 !important;
+  color: white !important;
 }
 [data-toolpad-color-scheme="light"] > body {
   background-color: #f3e8ff;
@@ -75,6 +75,9 @@
   color: black;
   margin-left: auto;
   margin-right: auto;
+}
+body{
+  overflow: auto !important;
 }
 /* Modal Overlay */
 .modal-overlay {
@@ -116,13 +119,13 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 [data-toolpad-color-scheme="dark"] .theme-bg {
-  background-color: #121212;
+  background-color: #121212 !important;
 }
 [data-toolpad-color-scheme="dark"] .ql-picker-label::before {
-  color: white;
+  color: white !important;
 }
 [data-toolpad-color-scheme="dark"] .theme-text {
-  color: white;
+  color: white !important;
 }
 
 @media (max-width: 500px) {

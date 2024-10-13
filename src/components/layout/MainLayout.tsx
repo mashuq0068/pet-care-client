@@ -6,7 +6,6 @@ import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import MenuItems from "./MenuItems";
 import { useRouter, usePathname } from "next/navigation";
 import type { Session } from "@toolpad/core";
-import { Toolbar } from "@mui/material";
 const demoTheme: Theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data-toolpad-color-scheme",

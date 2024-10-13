@@ -4,20 +4,21 @@ import Image from "next/image";
 import moment from "moment"; // Import Moment.js for time formatting
 
 export interface Comment {
-  id: number;
-  author: string;
-  text: string;
-  authorImage: string;
-  createdAt: Date;
+  id?: number;
+  author?: string;
+  text?: string;
+  content?: string;
+  authorImage?: string;
+  createdAt?: Date;
 }
 
 interface Post {
-  id: number;
-  author: string;
-  time: string;
-  content: string;
-  authorImage: string;
-  postImage: string;
+  id?: number;
+  author?: string;
+  time?: string;
+  content?: string;
+  authorImage?: string;
+  postImage?: string;
   comments: Comment[];
 }
 
@@ -29,23 +30,24 @@ interface CommentModalProps {
 
 const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, post }) => {
   const [newComment, setNewComment] = useState<string>("");
-  const [comments, setComments] = useState<Comment[]>(post.comments);
+  const [comments, setComments] = useState<Comment[]>(post?.comments);
 
   useEffect(() => {
-    setComments(post.comments);
+    setComments(post?.comments);
   }, [post.comments]);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
       const newCommentObject = {
-        id: comments.length + 1,
-        author: "You",
+        id: comments.length + 1, // Ideally, this should come from the backend
+        author: "You", // Replace with actual author data
         text: newComment,
         authorImage: "/path-to-your-avatar-image.jpg", // Replace with user's profile image
         createdAt: new Date(),
       };
       setComments([...comments, newCommentObject]);
       setNewComment("");
+      // Call the addComment mutation here to save the comment to the server
     }
   };
 
@@ -53,35 +55,35 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-     className="bg-white theme-bg rounded-lg p-8 w-full shadow-xl max-w-md mx-auto"
+      className="bg-white theme-bg rounded-lg p-8 w-full shadow-xl max-w-md mx-auto"
       overlayClassName="modal-overlay"
       ariaHideApp={false}
     >
-      <div className=" rounded-lg  md:max-w-lg mx-auto">
-      <div className="flex items-center mb-4">
+      <div className="rounded-lg md:max-w-lg mx-auto">
+        <div className="flex items-center mb-4">
           <input
             type="text"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a comment..."
-            className="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none "
+            className="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none"
           />
           <button
             onClick={handleAddComment}
             className="bg-purple-500 text-white theme-text p-3 border rounded-r-lg hover:bg-purple-600 transition-all"
           >
-           Comment
+            Comment
           </button>
         </div>
-        <h2 className="text-2xl font-bold mb-4 ">Comments</h2>
-        <div className="mb-6 max-h-60 overflow-y-auto ">
+        <h2 className="text-2xl font-bold mb-4">Comments</h2>
+        <div className="mb-6 max-h-60 overflow-y-auto">
           {comments.length > 0 ? (
             comments.map((comment) => (
               <div key={comment.id} className="flex items-center mb-5">
                 {/* Avatar Image */}
                 <Image
-                  src={comment.authorImage}
-                  alt={comment.author}
+                  src={comment.authorImage || ""}
+                  alt={comment.author || "author"}
                   width={40}
                   height={40}
                   className="rounded-full w-10 h-10 mr-3 object-cover"
@@ -102,7 +104,6 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onRequestClose, pos
             <p className="text-gray-500 theme-text">No comments yet. Be the first to comment!</p>
           )}
         </div>
-        
       </div>
     </ReactModal>
   );

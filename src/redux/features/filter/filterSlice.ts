@@ -1,37 +1,25 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// src/features/filter/filterSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface IInitialState {
-  brand: string | undefined;
-  rating: string | undefined;
-  category: string | undefined;
-  price: number | undefined;
-  searchTerm: string | undefined;
-  sort: string | undefined;
+type FilterOption = 'mostUpvoted' | 'mostCommented' | 'tips' | 'stories';
+
+interface FilterState {
+  selectedFilter: FilterOption | null;
 }
-const initialState: IInitialState = {
-  brand: undefined,
-  rating: undefined,
-  category: undefined,
-  price: undefined,
-  searchTerm: undefined,
-  sort: undefined,
+
+const initialState: FilterState = {
+  selectedFilter: null
 };
+
 const filterSlice = createSlice({
-  name: "filter",
-  initialState: initialState,
+  name: 'filter',
+  initialState,
   reducers: {
-    changeFilterState: (_state, action: PayloadAction<IInitialState>) => {
-      return action.payload;
-    },
-    clearFilter: (state) => {
-      state.brand = undefined;
-      state.rating = undefined;
-      state.category = undefined;
-      state.price = undefined;
-      state.sort = undefined;
+    setFilter: (state, action: PayloadAction<FilterOption>) => {
+      state.selectedFilter = action.payload;
     },
   },
 });
 
-export const { changeFilterState, clearFilter } = filterSlice.actions;
+export const { setFilter } = filterSlice.actions;
 export default filterSlice.reducer;

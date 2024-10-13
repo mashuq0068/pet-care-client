@@ -1,8 +1,5 @@
 import { Navigation } from "@toolpad/core";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import { FaRegNewspaper } from "react-icons/fa6";
-import LayersIcon from "@mui/icons-material/Layers";
-import { CgProfile } from "react-icons/cg";
+
 import { BiSolidUserAccount } from "react-icons/bi";
 import { MdContactSupport } from "react-icons/md";
 import { PiCoffeeDuotone } from "react-icons/pi";

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {Roboto_Slab}  from "next/font/google"
+import { Roboto_Slab } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
-import  { Toaster } from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "@/components/shared/ProtectedRoute";
 
-export const roboto_slab = Roboto_Slab({
-  subsets: ['latin'],
-  display: 'swap',
-})
+// Define the font outside of the export
+const robotoSlab = Roboto_Slab({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,17 +18,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={roboto_slab.className}>
-     <ReduxProvider>
-     <body>
-      <Toaster position="top-center"/>
-        {children}
+    <html lang="en" className={robotoSlab.className}>
+      <body>
+        <ReduxProvider>
+          <ProtectedRoute>
+            <Toaster position="top-center" />
+            {children}
+          </ProtectedRoute>
+        </ReduxProvider>
       </body>
-     </ReduxProvider>
     </html>
   );
 }

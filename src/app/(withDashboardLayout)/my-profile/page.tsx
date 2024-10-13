@@ -1,14 +1,12 @@
 "use client"
 import { useState } from "react";
 import Image from "next/image";
-import { FaUserFriends, FaUsers, FaCommentAlt } from "react-icons/fa";
-import { LuBookUp, LuMonitorDown } from "react-icons/lu";
+import { FaUserFriends, FaUsers } from "react-icons/fa";
 import { AiOutlineEdit } from "react-icons/ai";
 import CommentModal, { Comment } from "@/components/NewsFeed/CommentModal";
  // Import the FollowModal
 import { PiCoffeeDuotone } from "react-icons/pi";
-import FollowModal from "@/components/NewsFeed/FollowersModal";
-import ReactModal from "react-modal";
+
 import FollowersModal from "@/components/NewsFeed/FollowersModal";
 import FollowingModal from "@/components/NewsFeed/FollowingModal";
 import EditProfileModal from "@/components/NewsFeed/EditProfileModal";
@@ -75,10 +73,10 @@ const ProfilePage: React.FC = () => {
   const [editModalIsOpen , setEditModalIsOpen] = useState(false)
   const [selectedPost, setSelectedPost] = useState<Post2 | null>(null);
 
-  const commentOpenModal = (post: Post) => {
-    setSelectedPost(post as Post2);
-    setCommentModalIsOpen(true);
-  };
+  // const commentOpenModal = (post: Post) => {
+  //   setSelectedPost(post as Post2);
+  //   setCommentModalIsOpen(true);
+  // };
 
   const commentCloseModal = () => {
     setCommentModalIsOpen(false);
