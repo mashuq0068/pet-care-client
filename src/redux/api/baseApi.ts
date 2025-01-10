@@ -7,7 +7,7 @@ import { logout } from '../features/auth/authSlice';
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api/',
+  baseUrl: 'https://pet-care-server-pi.vercel.app/api/',
   prepareHeaders: (headers) => {
     const token = Cookies.get('token');
     if (token) {

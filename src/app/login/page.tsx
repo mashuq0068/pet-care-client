@@ -3,19 +3,31 @@
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import Image from "next/image";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hooks";
 import { IUser, setUser } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import axios from 'axios'
 
 const LoginPage = () => {
   const [login, { isLoading, error }] = useLoginMutation();
+  const [search] = useState(null)
+ 
   const router = useRouter()
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/users/admins?search=${search}`)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  },[])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +36,7 @@ const LoginPage = () => {
       const res = await login({ email, password }).unwrap();
       
       if (res?.success) {
-        const { token, data: { name, email: userEmail, role } } = res;
+        const { token, data: { name, email: userEmail, role, image } } = res;
   
         Cookies.set("token", token, { expires: 7 });
   
@@ -32,6 +44,7 @@ const LoginPage = () => {
           name,
           email: userEmail,
           role,
+          image
         };
   
         dispatch(setUser(user));
@@ -46,6 +59,7 @@ const LoginPage = () => {
       toast.error("Invalid email or password");
     }
   };
+  
   
 
   return (

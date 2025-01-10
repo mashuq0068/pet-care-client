@@ -4,11 +4,13 @@ export interface IUser {
   name: string | null;
   email: string | null;
   role: string | null;
+  image:string | null
 }
 const initialState: IUser = {
   name: null,
   email: null,
-  role: null,
+  role:null,
+  image:null
 };
 const authSlice = createSlice({
   name: "auth",
@@ -21,6 +23,7 @@ const authSlice = createSlice({
         state.name = null;
         state.email = null
         state.role = null
+        state.image = null
     }
   },
 });

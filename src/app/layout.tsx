@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Roboto_Slab } from "next/font/google";
+import { Poppins} from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "@/components/shared/ProtectedRoute";
 
 // Define the font outside of the export
-const robotoSlab = Roboto_Slab({
+const robotoSlab = Poppins({
   subsets: ["latin"],
   display: "swap",
+  weight: "400"
 });
 
 export const metadata: Metadata = {

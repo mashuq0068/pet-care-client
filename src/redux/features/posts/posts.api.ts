@@ -14,11 +14,11 @@ const postsApi = baseApi.injectEndpoints({
       providesTags: ["post"],
     }),
 
+    
     getSinglePost: builder.query({
       query: (id) => ({ url: `posts/${id}` }),
       providesTags: ["post"],
     }),
-
     createPost: builder.mutation({
       query: (payload) => ({
         url: "/posts",
@@ -31,6 +31,7 @@ const postsApi = baseApi.injectEndpoints({
     updatePost: builder.mutation({
       query: (data) => {
         const { id, ...payload } = data;
+        console.log("id",id);
         return {
           url: `/posts/${id}`,
           method: "PUT",
@@ -65,6 +66,22 @@ const postsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["post"],
     }),
+    followUser: builder.mutation({
+      query: (userId) => ({
+        url: `/posts/follow/${userId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["user" , "post"],
+    }),
+
+    unfollowUser: builder.mutation({
+      query: (userId) => ({
+        url: `/posts/unfollow/${userId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["user", "post"],
+    }),
+
   }),
 });
 
@@ -76,4 +93,6 @@ export const {
   useDeletePostMutation,
   useAddCommentMutation,
   useVoteOnPostMutation,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
 } = postsApi;

@@ -2,8 +2,11 @@
 "use client";
 import { useState } from "react";
 import ReactModal from "react-modal";
-import Image from "next/image";
-import { AiFillSave, AiFillEdit } from "react-icons/ai";
+import { AiFillSave } from "react-icons/ai";
+import { toast } from "react-hot-toast";
+import { useUpdateProfileMutation } from "@/redux/features/users/users.api";
+import { FaLink } from "react-icons/fa";
+
 
 const EditProfileModal: React.FC<{ isOpen: boolean; onRequestClose: () => void; profile: any }> = ({
   isOpen,
@@ -11,16 +14,24 @@ const EditProfileModal: React.FC<{ isOpen: boolean; onRequestClose: () => void; 
   profile,
 }) => {
   const [name, setName] = useState(profile.name);
-  const [title, setTitle] = useState(profile.title);
-  const [profileImage, setProfileImage] = useState(profile.profileImage);
+  const [profileImage, setProfileImage] = useState(profile.image);
+
+  const [updateProfile] = useUpdateProfileMutation();
 
   const handleImageChange = (e: any) => {
     setProfileImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleSave = () => {
-    console.log("Profile Updated", { name, title, profileImage });
-    onRequestClose();
+  const handleSave = async () => {
+    try {
+      const payload = { name, image:profileImage };
+      await updateProfile(payload).unwrap();
+      toast.success("Profile updated successfully!");
+      onRequestClose();
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update profile.");
+    }
   };
 
   return (
@@ -34,10 +45,10 @@ const EditProfileModal: React.FC<{ isOpen: boolean; onRequestClose: () => void; 
       <h2 className="text-2xl font-bold mb-6 ">Edit Profile</h2>
       <div className="space-y-6">
         {/* Profile Image */}
-        <div className="flex items-center mb-6">
+        {/* <div className="flex items-center mb-6">
           <label htmlFor="profileImage" className="cursor-pointer relative group">
             {profileImage ? (
-              <Image
+              <img
                 src={profileImage}
                 alt="Profile"
                 width={100}
@@ -59,29 +70,30 @@ const EditProfileModal: React.FC<{ isOpen: boolean; onRequestClose: () => void; 
             className="hidden"
             onChange={handleImageChange}
           />
-        </div>
+        </div> */}
         {/* Name Field */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Name</label>
           <input
             type="text"
-            value={name}
+            defaultValue={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             placeholder="Enter your name"
           />
         </div>
-        {/* Title Field */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-2">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            placeholder="Enter your title"
-          />
-        </div>
+        <div className="mt-4 flex flex-col space-y-4">
+                <div className="relative flex items-center">
+                  <FaLink className="absolute left-3 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Image URL"
+                    defaultValue={profileImage}
+                    onChange={handleImageChange}
+                    className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
+                  />
+                </div>
+              </div>
       </div>
       {/* Save Button */}
       <div className="flex justify-end mt-6">

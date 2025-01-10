@@ -4,8 +4,8 @@
 
 /* dashboard layout  */
 .css-162wlvu-MuiPaper-root-MuiAppBar-root {
-  border-bottom-width: 0px !important;
-  background-color: #f3e8ff !important;
+  /* border-bottom-width: 0px !important;
+  background-color: #f3e8ff !important; */
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04))
     drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
 
@@ -17,17 +17,32 @@
   background-color: #121212 !important;
 }
 
+
 .css-1m3g8jr-MuiPaper-root-MuiDrawer-paper {
-  border-width: 0px !important;
-  background-color: #f3e8ff !important;
+  /* border-width: 0px !important; */
+  background-color: #f3f4f6 !important;
   z-index: 500 !important;
  
 
   /* filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
 }
+.css-ykjl82-MuiListSubheader-root {
+  background-color: #f3f4f6 !important; /* Light gray background */
+  font-size: 14px !important; /* Font size */
+  border: 1px solid #d1d5db; /* Lighter grey border */
+  padding-bottom: 45px !important;
+  /* text-transform: uppercase !important; */
+  font-weight: 600 !important;
+  margin-top: 20px;
+  /* padding-left: 60px !important; */
+}
+
+[data-toolpad-color-scheme="dark"] .css-ykjl82-MuiListSubheader-root {
+  background-color: #121212 !important;
+}
 [data-toolpad-color-scheme="dark"] .css-1m3g8jr-MuiPaper-root-MuiDrawer-paper {
-  border-width: 0px !important;
+  /* border-width: 0px !important; */
   background-color: #121212 !important;
   /* filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
@@ -48,8 +63,8 @@
   color: white !important;
 }
 [data-toolpad-color-scheme="light"] > body {
-  background-color: #f3e8ff;
-  color: black;
+  /* background-color: #f3e8ff;
+  color: black; */
 }
 [data-toolpad-color-scheme="dark"] .container {
   background-color: #121212 !important;
@@ -57,10 +72,10 @@
 }
 .css-1gld6jr-MuiButtonBase-root-MuiListItemButton-root.Mui-selected
   .MuiTypography-root {
-  background-color: #f3e8ff !important;
+  /* background-color: #f3e8ff !important;
   color: black !important;
   border-right: 4px solid #A855F7;
-  border-radius: 3px;
+  border-radius: 3px; */
 }
 [data-toolpad-color-scheme="dark"]
   .css-1gld6jr-MuiButtonBase-root-MuiListItemButton-root.Mui-selected
