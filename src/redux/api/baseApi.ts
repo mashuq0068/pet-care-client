@@ -7,7 +7,7 @@ import { logout } from '../features/auth/authSlice';
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://pet-care-server-pi.vercel.app/api/',
+  baseUrl: 'http://localhost:5000/api/',
   prepareHeaders: (headers) => {
     const token = Cookies.get('token');
     if (token) {
@@ -15,6 +15,7 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
+
 });
 
 
@@ -38,6 +39,7 @@ const baseApi = createApi({
   baseQuery: customBaseQuery,
   tagTypes: ['post', 'user', 'auth'], // Adjust tagTypes according to your needs
   endpoints: () => ({}), // Add endpoints here later
+  
 });
 
 export default baseApi;

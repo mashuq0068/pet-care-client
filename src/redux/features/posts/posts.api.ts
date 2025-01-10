@@ -81,6 +81,36 @@ const postsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user", "post"],
     }),
+     // Add a reaction to a post
+ // Add a reaction to a post
+ addReaction: builder.mutation({
+  query: ({ postId, type }) => ({
+    url: `/posts/${postId}/reactions`,
+    method: "POST",
+    body: { type },
+  }),
+  invalidatesTags: ["post"],
+}),
+
+// Remove a reaction from a post
+removeReaction: builder.mutation({
+  query: ({ postId, type }) => ({
+    url: `/posts/${postId}/reactions`,
+    method: "DELETE",
+    body: { type },
+  }),
+  invalidatesTags: ["post"],
+}),
+
+// Get reaction counts for a post
+getReactionCounts: builder.query({
+  query: (postId) => ({
+    url: `/posts/${postId}/reactions/counts`,
+    method: "GET",
+  }),
+  providesTags: ["post"],
+}),
+
 
   }),
 });
@@ -95,4 +125,7 @@ export const {
   useVoteOnPostMutation,
   useFollowUserMutation,
   useUnfollowUserMutation,
+  useAddReactionMutation, 
+  useRemoveReactionMutation, 
+  useGetReactionCountsQuery, 
 } = postsApi;

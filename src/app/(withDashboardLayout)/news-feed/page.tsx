@@ -21,6 +21,7 @@ import {
 import { useAppSelector } from "@/redux/hooks";
 import { useGetProfileQuery } from "@/redux/features/users/users.api";
 import Loading from "@/app/loading";
+import Reaction from "@/components/NewsFeed/Reaction";
 
 export interface IUser {
   _id: string;
@@ -51,6 +52,7 @@ interface Post {
   downvotes: string[];
   category: string;
   createdAt: Date;
+  reactions : { [key: string]: number }
 }
 
 const NewsFeedPage: React.FC = () => {
@@ -66,6 +68,7 @@ const NewsFeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [visiblePosts, setVisiblePosts] = useState<Post[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  console.log(posts);
   const postsPerPage = 1;
   useEffect(() => {
     if (data?.data) {
@@ -281,6 +284,7 @@ const NewsFeedPage: React.FC = () => {
                   </span>
                 </div>
               </div>
+              <Reaction postId={post._id} reactions={post.reactions || {}} />
               <button
                 className="flex md:ml-0 ml-3 items-center"
                 onClick={() => openModal(post)}

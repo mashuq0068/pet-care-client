@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { MoreVert } from "@mui/icons-material";
 import "react-quill/dist/quill.snow.css";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import CommentModal from "@/components/NewsFeed/CommentModal";
 // Import the FollowModal
 import { PiCoffeeDuotone } from "react-icons/pi";
@@ -378,17 +378,18 @@ const ProfilePage: React.FC = () => {
           onRequestClose={closeEditModal}
           profile={profileData?.data}
         />
-        <Modal
-          isOpen={isModalOpen}
-          onRequestClose={closeModal}
-          className="bg-white theme-bg rounded-lg p-2 w-full shadow-xl max-w-lg mx-auto"
-          overlayClassName="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-          contentLabel="Create Post Modal"
-        >
-          <div className="p-4">
-            <h2 className="text-xl font-semibold mb-4">Edit Post</h2>
-            {/* Rich Text Editor */}
-            {/* <form > */}
+         {/* Modal */}
+         {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white theme-bg rounded-lg shadow-xl max-w-lg w-full p-6 relative">
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 focus:outline-none"
+              >
+                 <AiOutlineClose size={18} />
+              </button>
+              <h2 className="text-xl font-semibold mb-4">Edit Post</h2>
+               {/* <form > */}
             <ReactQuill
               defaultValue={selectedPost?.content}
               onChange={setEditorContent}
@@ -435,9 +436,9 @@ const ProfilePage: React.FC = () => {
                 Update
               </button>
             </div>
-            {/* </form> */}
+            </div>
           </div>
-        </Modal>
+        )}
       </div>
     </div>
   );
