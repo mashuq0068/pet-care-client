@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client"
+"use client";
+
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import Image from "next/image";
 import { FaEnvelope, FaLock } from "react-icons/fa";
@@ -9,46 +10,47 @@ import { IUser, setUser } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from 'axios'
+import axios from "axios";
 
 const LoginPage = () => {
   const [login, { isLoading, error }] = useLoginMutation();
-  const [search] = useState(null)
- 
-  const router = useRouter()
-  const dispatch = useAppDispatch();
+  const [showTooltip, setShowTooltip] = useState(true); // Tooltip state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/users/admins?search=${search}`)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  },[])
+    axios
+      .get("http://localhost:5000/api/users/admins")
+      .then((res) => console.log(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     try {
       const res = await login({ email, password }).unwrap();
-      
+
       if (res?.success) {
-        const { token, data: { name, email: userEmail, role, image } } = res;
-  
+        const {
+          token,
+          data: { name, email: userEmail, role, image },
+        } = res;
+
         Cookies.set("token", token, { expires: 7 });
-  
+
         const user: IUser = {
           name,
           email: userEmail,
           role,
-          image
+          image,
         };
-  
+
         dispatch(setUser(user));
-  
+
         toast.success("You logged in successfully");
         router.push("/news-feed");
       } else {
@@ -59,8 +61,6 @@ const LoginPage = () => {
       toast.error("Invalid email or password");
     }
   };
-  
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -75,13 +75,38 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="w-full md:w-1/2 p-8 space-y-6">
+        <div className="w-full md:w-1/2 p-8 space-y-6 ">
           <h2 className="text-3xl font-bold text-gray-800 text-center">
             Welcome Back
           </h2>
           <p className="text-sm text-gray-500 text-center">
             Log in to your account to continue
           </p>
+
+          {/* Tooltip */}
+          {showTooltip && (
+            <div className="absolute top-4 right-4 z-50 rounded-lg bg-gray-100 p-4 shadow-lg drop-shadow-lg w-72">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Credentials
+                </h3>
+                <button
+                  className="text-gray-500 hover:text-gray-700"
+                  onClick={() => setShowTooltip(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="mt-2">
+                <p className="text-sm text-gray-600 mt-2">
+                  <strong>Admin:</strong> admin123@gmail.com / Password: admin123
+                </p>
+                <p className="text-sm text-gray-600">
+                  <strong>User:</strong> user123@gmail.com / Password: user123
+                </p>
+              </div>
+            </div>
+          )}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="relative">

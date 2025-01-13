@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
-import { useRouter, usePathname, redirect } from "next/navigation";
+import {  usePathname, redirect } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Cookies from "js-cookie";
 import { logout } from "@/redux/features/auth/authSlice";
-import { AdminMenuItems, UserMenuItems } from "./MenuItems";
+import { AdminMenuItems, UserMenuItems, UserMenuItemsRight } from "./MenuItems";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 
@@ -14,7 +14,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth);
-  const router = useRouter();
   const pathname = usePathname();
 
   const authentication = React.useMemo(() => {
@@ -33,7 +32,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col sm:flex-row">
       {/* Mobile Header */}
-      <header className="bg-gray-200 sticky top-0 z-50 text-black py-4 px-6 flex items-center justify-between sm:hidden">
+      <header className="bg-gray-200 sticky top-0 z-30  text-black py-4 px-6 flex items-center justify-between sm:hidden">
         <button
           onClick={() => setSidebarOpen(true)}
           className="text-black"
@@ -49,7 +48,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </header>
 
       {/* Sidebar for Desktop */}
-      <aside className="bg-gray-100 shadow-md text-black w-64 fixed top-0 left-0 h-full p-4 lg:block hidden lg:flex-shrink-0">
+      <aside className="bg-gray-100 z-40 shadow-md text-black w-64 fixed top-0 left-0 h-screen p-4 lg:block hidden">
         <div className="flex items-center gap-3 mb-4">
           <img
             src="/images/pet-care-logo.png"
@@ -79,6 +78,33 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </ul>
         </nav>
       </aside>
+      {/* Sidebar for Desktop (Right) */}
+<aside
+  className="bg-gray-100 shadow-md text-black w-64 fixed top-16 right-0 h-[calc(100vh-4rem)] p-4 lg:block hidden z-40"
+>
+  <nav className="flex-1">
+    <ul className="space-y-2">
+      {UserMenuItemsRight?.map((item: any, index) => (
+        <li key={index}>
+          <a
+            href={item.segment}
+            className={`block py-2 px-4 rounded ${
+              pathname === `/${item.segment}`
+                ? "border-l-4 border-purple-500 bg-gray-200"
+                : "hover:bg-gray-200"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              {item.icon}
+              {item.title}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>
+
 
       {/* Drawer for Mobile */}
       <Dialog
@@ -133,9 +159,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </Dialog>
 
       {/* Main Content */}
-      <div className="flex-1 sm:ml-64 flex flex-col">
+      <div className="flex-1 sm:mx-auto flex flex-col">
         {/* Header for Desktop */}
-        <header className="bg-gray-200 sticky top-0 z-50 hidden sm:flex text-black py-4 px-6 justify-end">
+        <header className="bg-gray-200 sticky top-0 hidden sm:flex text-black py-4 px-6 justify-end">
           <button
             onClick={authentication.signOut}
             className="bg-purple-500 text-white py-1 px-4 rounded shadow-md hover:bg-purple-600"

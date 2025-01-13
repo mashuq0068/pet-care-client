@@ -29,7 +29,7 @@ import {
 import { LuBookUp, LuLightbulb, LuMonitorDown } from "react-icons/lu";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-const Modal = dynamic(() => import('react-modal'), { ssr: false });
+
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
 

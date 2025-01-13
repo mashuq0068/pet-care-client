@@ -52,7 +52,7 @@ interface Post {
   downvotes: string[];
   category: string;
   createdAt: Date;
-  reactions : { [key: string]: number }
+  reactions : { user: string; type: string }[]
 }
 
 const NewsFeedPage: React.FC = () => {
@@ -172,14 +172,14 @@ const NewsFeedPage: React.FC = () => {
   return (
     <div className="">
       <CreatePost />
-      <div className="container w-full rounded-lg p-0 my-4 relative">
+      <div className="container z-10 w-full rounded-lg p-0 my-4 ">
         <FaSearch className="absolute top-[35%] left-4 text-gray-400" />
         <input
           type="text"
           placeholder="Search posts..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
+          className="w-full  p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
         />
       </div>
       <InfiniteScroll

@@ -19,7 +19,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
 }) => {
   const [newComment, setNewComment] = useState<string>("");
   const [addComment] = useAddCommentMutation();
-  const [forceRender, setForceRender] = useState(0);
+  const [, setForceRender] = useState(0);
 
   const handleAddComment = async () => {
     if (newComment.trim()) {
