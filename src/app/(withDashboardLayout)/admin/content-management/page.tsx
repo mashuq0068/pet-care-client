@@ -33,7 +33,7 @@ const Posts: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto min-h-[100vh] p-6">
+    <div className="max-w-3xl p-8 rounded-lg mt-8 shadow-md bg-white mx-auto">
       <h4 className="text-2xl font-bold mb-6 theme-text text-gray-800">Manage Posts</h4>
       <table className="min-w-full bg-white theme-bg rounded-lg shadow">
         <thead>

@@ -44,6 +44,41 @@ const usersApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+
+    sendFriendRequest: builder.mutation({
+      query: ({ userId, targetUserId }) => ({
+        url: `/users/send-friend-request`,
+        method: "POST",
+        body: { userId, targetUserId },  // Pass both userId and targetUserId
+      }),
+      invalidatesTags: ["user"],
+    }),
+
+    acceptFriendRequest: builder.mutation({
+      query: ({ userId, requestId }) => ({
+        url: `/users/accept-friend-request`,
+        method: "POST",
+        body: { userId, requestId },  // Pass both userId and requestId
+      }),
+      invalidatesTags: ["user"],
+    }),
+
+    removeFriend: builder.mutation({
+      query: ({ userId, friendId }) => ({
+        url: `/users/remove-friend`,
+        method: "POST",
+        body: { userId, friendId },  // Pass both userId and friendId
+      }),
+      invalidatesTags: ["user"],
+    }),
+    removeFriendRequest: builder.mutation({
+      query: ({ userId, requestedId }) => ({
+        url: `/users/remove-friend-request`,
+        method: "POST",
+        body: { userId, requestedId },  
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
@@ -53,4 +88,8 @@ export const {
   useGetAllUsersQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useSendFriendRequestMutation,
+  useAcceptFriendRequestMutation,
+  useRemoveFriendMutation,
+  useRemoveFriendRequestMutation
 } = usersApi;

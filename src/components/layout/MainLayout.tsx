@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
-import {  usePathname, redirect } from "next/navigation";
+import { usePathname, redirect } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Cookies from "js-cookie";
@@ -9,9 +9,12 @@ import { logout } from "@/redux/features/auth/authSlice";
 import { AdminMenuItems, UserMenuItems, UserMenuItemsRight } from "./MenuItems";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
+import { useGetProfileQuery } from "@/redux/features/users/users.api";
+import Link from "next/link";
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const { data: profileData, isLoading } = useGetProfileQuery(undefined);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth);
   const pathname = usePathname();
@@ -33,11 +36,8 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div className="min-h-screen flex flex-col sm:flex-row">
       {/* Mobile Header */}
       <header className="bg-gray-200 sticky top-0 z-30  text-black py-4 px-6 flex items-center justify-between sm:hidden">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="text-black"
-        >
-          <FaBars className="text-black mr-2" /> 
+        <button onClick={() => setSidebarOpen(true)} className="text-black">
+          <FaBars className="text-black mr-2" />
         </button>
         <button
           onClick={authentication.signOut}
@@ -79,32 +79,29 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         </nav>
       </aside>
       {/* Sidebar for Desktop (Right) */}
-<aside
-  className="bg-gray-100 shadow-md text-black w-64 fixed top-16 right-0 h-[calc(100vh-4rem)] p-4 lg:block hidden z-40"
->
-  <nav className="flex-1">
-    <ul className="space-y-2">
-      {UserMenuItemsRight?.map((item: any, index) => (
-        <li key={index}>
-          <a
-            href={item.segment}
-            className={`block py-2 px-4 rounded ${
-              pathname === `/${item.segment}`
-                ? "border-l-4 border-purple-500 bg-gray-200"
-                : "hover:bg-gray-200"
-            }`}
-          >
-            <span className="flex items-center gap-2">
-              {item.icon}
-              {item.title}
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-</aside>
-
+      <aside className="bg-gray-100 shadow-md text-black w-64 fixed top-16 right-0 h-[calc(100vh-4rem)] p-4 lg:block hidden z-40">
+        <nav className="flex-1">
+          <ul className="space-y-2">
+            {UserMenuItemsRight?.map((item: any, index) => (
+              <li key={index}>
+                <a
+                  href={item.segment}
+                  className={`block py-2 px-4 rounded ${
+                    pathname === `/${item.segment}`
+                      ? "border-l-4 border-purple-500 bg-gray-200"
+                      : "hover:bg-gray-200"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    {item.icon}
+                    {item.title}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
 
       {/* Drawer for Mobile */}
       <Dialog
@@ -161,13 +158,20 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Main Content */}
       <div className="flex-1 sm:mx-auto flex flex-col">
         {/* Header for Desktop */}
-        <header className="bg-gray-200 sticky top-0 hidden sm:flex text-black py-4 px-6 justify-end">
+        <header className="bg-gray-200  sticky top-0 hidden sm:flex text-black py-4 px-6 justify-end">
           <button
             onClick={authentication.signOut}
             className="bg-purple-500 text-white py-1 px-4 rounded shadow-md hover:bg-purple-600"
           >
             Logout
           </button>
+          <Link href="/my-profile">
+            <img
+              className=" w-8 rounded-full ml-2 h-8 object-cover"
+              src={profileData?.data?.image}
+              alt=""
+            />
+          </Link>
         </header>
 
         <main className="flex-1 bg-gray-100  overflow-x-hidden p-3 overflow-y-auto">

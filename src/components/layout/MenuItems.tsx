@@ -89,17 +89,17 @@ export const AdminMenuItems: Navigation = [
     icon: <MdContactSupport className="text-red-500 text-xl" />, // Light purple for contact
   },
   {
-    segment: "admin/user-management",
+    segment: "/admin/user-management",
     title: "User Management",
     icon: <AiOutlineUsergroupAdd className="text-purple-500 text-xl" />, // Green for user management
   },
   {
-    segment: "admin/content-management",
+    segment: "/admin/content-management",
     title: "Content Management",
     icon: <RiFileList2Line className="text-orange-500 text-xl" />, // Blue for content management
   },
   {
-    segment: "admin/payment-history",
+    segment: "/admin/payment-history",
     title: "Payment History",
     icon: <BsCashStack className="text-green-500 text-xl" />, // Yellow for payment history
   },

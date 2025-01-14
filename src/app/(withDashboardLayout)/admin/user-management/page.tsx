@@ -51,10 +51,10 @@ const Users: React.FC = () => {
 
 
   return (
-    <div className="mx-auto p-12 min-h-[100vh]">
+    <div className=" max-w-3xl p-8 rounded-lg mt-8 shadow-md bg-white mx-auto">
       <Toaster position="top-right" />
-      <h1 className="text-2xl font-bold mb-6">Manage Users</h1>
-      <table className="min-w-full bg-white theme-bg rounded-lg shadow">
+      <h1 className="text-xl font-bold mb-6">Manage Users</h1>
+      <table className="min-w-full bg-white  theme-bg rounded-lg shadow">
         <thead>
           <tr className="text-gray-700 theme-text">
             <th className="p-3 text-left">Image</th>
@@ -67,7 +67,7 @@ const Users: React.FC = () => {
           {users?.data?.map((user: IUser) => (
             <tr
               key={user._id}
-              className="border-b hover:bg-gray-50 transition-colors"
+              className="border-b  hover:bg-gray-50 transition-colors"
             >
               <td className="p-3">
                 <img
@@ -88,7 +88,7 @@ const Users: React.FC = () => {
                 <button
                   className={`${
                     user.role === "user" ? "bg-purple-500" : "bg-gray-500"
-                  } text-white  flex items-center px-4 py-1 rounded`}
+                  } text-white  flex items-center px-3 py-2 rounded-lg`}
                   onClick={() => handleToggleAdmin(user._id, user.role)}
                 >
                   {user.role === "user" ? (
@@ -102,7 +102,7 @@ const Users: React.FC = () => {
                   )}
                 </button>
                 <button
-                  className="bg-red-500 text-white flex items-center px-4 py-1 rounded"
+                  className="bg-red-500 text-white flex items-center px-3 py-2 rounded-lg"
                   onClick={() => handleDeleteUser(user._id)}
                 >
                   <FaTrashAlt className="mr-2" /> Delete

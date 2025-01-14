@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaBook,
   FaCommentAlt,
@@ -28,10 +28,11 @@ import {
 } from "@/redux/features/posts/posts.api";
 import { LuBookUp, LuLightbulb, LuMonitorDown } from "react-icons/lu";
 import { IconButton, Menu, MenuItem } from "@mui/material";
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 // Sample data for profile page
 
@@ -196,7 +197,7 @@ const ProfilePage: React.FC = () => {
   if (isLoading || isProfilePostsLoading || !profileData || !profilePosts) {
     return <Loading />;
   }
- 
+
   return (
     <div className="mx-auto min-h-[100vh]">
       {/* User Info Section */}
@@ -225,20 +226,14 @@ const ProfilePage: React.FC = () => {
               <PiCoffeeDuotone className="text-orange-500 cursor-pointer text-lg mx-auto mb-2" />
               <p>{profilePosts?.data?.length} Posts</p>
             </div>
-            <div
-              className="text-center cursor-pointer"
-              onClick={openFollowersModal}
-            >
+            <Link href="/followers" className="text-center cursor-pointer">
               <FaUserFriends className="text-blue-500 cursor-pointer mx-auto mb-2" />
               <p>{profileData?.data?.followers.length} Followers</p>
-            </div>
-            <div
-              onClick={openFollowedModal}
-              className="text-center cursor-pointer"
-            >
+            </Link>
+            <Link href="/following" className="text-center cursor-pointer">
               <FaUsers className="text-purple-500 cursor-pointer mx-auto mb-2" />
               <p>{profileData?.data?.following.length} Following</p>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -378,64 +373,64 @@ const ProfilePage: React.FC = () => {
           onRequestClose={closeEditModal}
           profile={profileData?.data}
         />
-         {/* Modal */}
-         {isModalOpen && (
+        {/* Modal */}
+        {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white theme-bg rounded-lg shadow-xl max-w-lg w-full p-6 relative">
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 focus:outline-none"
               >
-                 <AiOutlineClose size={18} />
+                <AiOutlineClose size={18} />
               </button>
               <h2 className="text-xl font-semibold mb-4">Edit Post</h2>
-               {/* <form > */}
-            <ReactQuill
-              defaultValue={selectedPost?.content}
-              onChange={setEditorContent}
-              placeholder="What's on your mind?"
-              className="border-none shadow-sm rounded-md"
-            />
-            {/* Category Selection */}
-            <div className="mt-4">
-              <select
-                required
-                defaultValue={selectedPost?.category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
-              >
-                <option value="tip">Tip</option>
-                <option value="story">Story</option>
-              </select>
-            </div>
-            {/* Image URL Input */}
-            <div className="mt-4 flex flex-col space-y-4">
-              <div className="relative flex items-center">
-                <FaLink className="absolute left-3 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Image URL"
-                  defaultValue={selectedPost?.image}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
-                />
+              {/* <form > */}
+              <ReactQuill
+                defaultValue={selectedPost?.content}
+                onChange={setEditorContent}
+                placeholder="What's on your mind?"
+                className="border-none shadow-sm rounded-md"
+              />
+              {/* Category Selection */}
+              <div className="mt-4">
+                <select
+                  required
+                  defaultValue={selectedPost?.category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
+                >
+                  <option value="tip">Tip</option>
+                  <option value="story">Story</option>
+                </select>
               </div>
-            </div>
-            {/* Modal Buttons */}
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={closeModal}
-                className="mr-2 py-2 px-4 text-black bg-gray-200 rounded-lg hover:bg-gray-400 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleEditPost}
-                className="py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-              >
-                Update
-              </button>
-            </div>
+              {/* Image URL Input */}
+              <div className="mt-4 flex flex-col space-y-4">
+                <div className="relative flex items-center">
+                  <FaLink className="absolute left-3 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Image URL"
+                    defaultValue={selectedPost?.image}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 shadow"
+                  />
+                </div>
+              </div>
+              {/* Modal Buttons */}
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={closeModal}
+                  className="mr-2 py-2 px-4 text-black bg-gray-200 rounded-lg hover:bg-gray-400 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleEditPost}
+                  className="py-2 px-4 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
         )}
